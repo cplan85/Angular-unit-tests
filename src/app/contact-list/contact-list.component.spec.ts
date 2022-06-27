@@ -1,25 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Contact } from './../interafaces';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ContactListComponent } from './contact-list.component';
 
 describe('ContactListComponent', () => {
-  let component: ContactListComponent = new ContactListComponent;
+  let component: ContactListComponent;
   let fixture: ComponentFixture<ContactListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ContactListComponent ]
-    })
-    .compileComponents();
+ 
 
+  beforeEach(waitForAsync(() => {
+     TestBed.configureTestingModule({
+      declarations: [ContactListComponent]
+    }).compileComponents()
+  }))
+
+  beforeEach( () => {
     fixture = TestBed.createComponent(ContactListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  beforeAll(() => {
-    const component = new ContactListComponent();
   })
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -36,6 +37,16 @@ describe('ContactListComponent', () => {
     //BEFORE CALLING LOAD CONTACT LENGTH SHOULD BE 0
     expect(component.contacts.length).toBe(0);
     component.load();
+    //CALL THE LOAD FUNCTION, THEN CHECK TO SEE THAT LENGTH IS 1
+    expect(component.contacts.length).toBe(1);
+  });
+
+  it('the Create method should add a contact to contacts', () => {
+   
+    //BEFORE CALLING LOAD CONTACT LENGTH SHOULD BE 0
+    expect(component.contacts.length).toBe(0);
+    const contact: Contact = {name: "Jose", phone: 999999, };
+    component.create(contact);
     //CALL THE LOAD FUNCTION, THEN CHECK TO SEE THAT LENGTH IS 1
     expect(component.contacts.length).toBe(1);
   });

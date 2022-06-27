@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Contact } from '../interafaces';
 
 @Component({
   selector: 'app-contact-list',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactListComponent implements OnInit {
 
-  contacts: {}[] = [];
+
+  contacts: Contact[] = [];
 
   constructor() { }
 
@@ -18,5 +20,9 @@ export class ContactListComponent implements OnInit {
     this.contacts = [
       {id:1, name: "Luis", phone: 9999999999 }
     ]
+  }
+
+  create(contactToCreate: Contact ) {
+    this.contacts.push( {id:2, name: contactToCreate.name, phone: contactToCreate.phone })
   }
 }
